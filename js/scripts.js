@@ -48,7 +48,7 @@ Pizza.prototype.returnPrice = function()
 
 Pizza.prototype.returnToppings = function()
 {
-  var totalToppings = []
+  var totalToppings = [];
 
   if(this.hasPepperoni)
   {
@@ -71,20 +71,23 @@ Pizza.prototype.returnToppings = function()
   {
     totalToppings[totalToppings.length - 1 ] = " and " + totalToppings[totalToppings.length - 1 ];
 
-    var output = totalToppings.join(", ");
+    return " with " + totalToppings.join(", ");
   }
   else if(totalToppings.length == 2)
   {
     totalToppings[1] = " and " + totalToppings[1];
 
-    var output = totalToppings.join(" ");
+    return " with " + totalToppings.join(" ");
+  }
+  else if(totalToppings.length == 1)
+  {
+    return " with " + totalToppings;
   }
   else
   {
-    var output = totalToppings;
+    return "";
   }
 
-  return output;
 }
 
 //user interface logic
@@ -101,10 +104,16 @@ $(document).ready(function() {
 
     totalPrice += pizzaOne.returnPrice();
 
-    $("#output").append("<li>" + "You ordered a " + inputSize + " pizza with " + pizzaOne.returnToppings());
-    $("#output").append("<li>" + "The total is now " + totalPrice)
+    $("#output").append("<li>" + "You ordered a " + inputSize + " pizza " +  pizzaOne.returnToppings()) + "</li>";
+
+    $("#output").append("<li>" + "The total is now " + totalPrice + " $" + "</li>");
 
     console.log(pizzaOne.returnPrice());
 
+  });
+
+  $("#reset").click(function(event) {
+    $("#output").empty();
+    totalPrice = 0;
   });
 });

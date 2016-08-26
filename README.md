@@ -40,6 +40,12 @@ This software is licensed under a MIT license.
 
 **Example Output:** [You ordered a medium pizza with pepperoni and ham. The price is 6]
 
+* It now will insert commas when more than two toppings are ordered
+
+**Example Input:** Pizza Size medium, Pepperoni, Ham, Green Peppers
+
+**Example Output:** [You ordered a medium pizza with pepperoni, ham, and green peppers. The price is 6.5]
+
 * It now will total up price for different pizzas.
 
 **Example Input:** Pizza Size medium, Pepperoni, Ham
