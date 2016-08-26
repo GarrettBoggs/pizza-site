@@ -12,6 +12,13 @@ button{
   margin-bottom: 20px;
 }
 
+img
+{
+  position:absolute;
+  top: 300px;
+  right: 0px;
+}
+
 ul{
   margin-top: 20px;
   font-size: 25px;
@@ -28,5 +35,34 @@ ul{
 }
 
 #reset{
-  float: right;
+  float: center;
+}
+
+#space{
+  float:right;
+  list-style-type: none;
+}
+
+#layer1
+{
+   z-index: 10;
+}
+#layer2
+{
+z-index: 20;
+}
+
+#layer3
+{
+z-index: 30;
+}
+
+#layer4
+{
+z-index: 40;
+}
+
+#layer5
+{
+z-index: 50;
 }

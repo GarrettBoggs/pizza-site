@@ -10,7 +10,7 @@
 
   <body>
     <div class="container">
-      <h1 class= "jumbotron">PizzaBoggs</h1>
+      <h1 class="jumbotron">PizzaBoggs</h1>
       <form>
         <h2>Size</h2>
         <select class="form-control" id="size">
@@ -18,7 +18,9 @@
           <option value="medium">medium</option>
           <option value="large">large</option>
         </select>
-        <h2>Toppings</h2>
+        <p id="space">
+        </p>
+        <h2>Toppings (Cost 50 cents each. Anchovies cost 1$!)</h2>
         <div class="check">
           <input type="checkbox" name="top1" value= true> pepperoni
         </div>
@@ -31,16 +33,14 @@
         <div class="check">
           <input type="checkbox" name="top4" value= true> pineapple
         </div>
+        <div class="check">
+          <input type="checkbox" name="top5" value= true> anchovies
+        </div>
         <button type="submit" class="btn btn-success">Order my pizza!</button>
+        <button type="button" class="btn btn-danger" id="reset">Reset my Order</button>
       </form>
-
-      <button type="button" class="btn btn-danger" id="reset">Reset my Order</button>
-
       <ul id="output">
       </ul>
-
     </div>
-    <ul id="output">
-    </ul>
   </body>
 </html>
