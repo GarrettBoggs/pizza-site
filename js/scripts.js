@@ -29,7 +29,6 @@ Pizza.prototype.returnPrice = function()
 
 Pizza.prototype.returnToppings = function()
 {
-
   if(this.totalToppings.length > 2)
   {
     this.totalToppings[this.totalToppings.length - 1 ] = " and " + this.totalToppings[this.totalToppings.length - 1 ];
@@ -51,7 +50,6 @@ Pizza.prototype.returnToppings = function()
     return "";
   }
 }
-
 //user interface logic
 $(document).ready(function()
 {
@@ -61,7 +59,7 @@ $(document).ready(function()
   $("form").submit(function(event)
   {
     event.preventDefault();
-    $("#space").empty();
+    $("#createspace").empty();
     var inputSize = $("#size").val();
     var topOne = $("input:checkbox[name=top1]:checked").val();
     var topTwo = $("input:checkbox[name=top2]:checked").val();
@@ -91,16 +89,16 @@ $(document).ready(function()
     }
     else if(inputSize === "medium")
     {
-      height = 350;
-      width = 350;
+      height = 300;
+      width = 300;
     }
     else
     {
-      height = 500;
-      width = 500;
+      height = 400;
+      width = 400;
     }
 
-    $("#createspace").append("<li><img class='pizzaImage' src='./img/pizza.png'> </li>");
+    $("#createspace").append("<li><img class='pizzaImage' src='./img/pizza.png'></li>");
 
     for(var i = 0; i < pizzaOne.totalToppings.length; i++)
     {

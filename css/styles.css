@@ -1,5 +1,6 @@
 body {
-  background-image: url("../img/wood.jpg");
+  background: url("../img/brick.jpg");
+  color: black;
 }
 
 h1{
@@ -7,20 +8,23 @@ h1{
   font-size: 50px;
 }
 
+h2{
+  margin-top: 60px;
+}
+
 button{
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 40px;
 }
 
 img
 {
   position:absolute;
-  top: 300px;
-  right: 0px;
+  top: 310px;
+  right: 100px;
 }
 
 ul{
-  margin-top: 20px;
+  margin-top: 40px;
   font-size: 25px;
 }
 
@@ -31,7 +35,6 @@ ul{
 .jumbotron{
   background-image: url("../img/wood.jpg");
   box-shadow: 5px 10px 5px 5px gray;
-
 }
 
 #reset{
@@ -43,26 +46,18 @@ ul{
   list-style-type: none;
 }
 
-#layer1
-{
-   z-index: 10;
-}
-#layer2
-{
+#layer2{
 z-index: 20;
 }
 
-#layer3
-{
+#layer3{
 z-index: 30;
 }
 
-#layer4
-{
+#layer4{
 z-index: 40;
 }
 
-#layer5
-{
+#layer5{
 z-index: 50;
 }
