@@ -1,6 +1,4 @@
 //business logic
-var totalPrice = 0;
-
 function Pizza(size, pepperoni, ham, green, pineapple) {
   this.pizzaSize = size;
   this.hasPepperoni = pepperoni;
@@ -87,11 +85,11 @@ Pizza.prototype.returnToppings = function()
   {
     return "";
   }
-
 }
 
 //user interface logic
 $(document).ready(function() {
+  var totalPrice = 0;
   $("form").submit(function(event) {
     event.preventDefault();
     var inputSize = $("#size").val();
@@ -100,13 +98,13 @@ $(document).ready(function() {
     var topThree = $("input:checkbox[name=top3]:checked").val();
     var topFour = $("input:checkbox[name=top4]:checked").val();
 
-    var pizzaOne = new Pizza(inputSize,topOne,topTwo,topThree, topFour);
+    var pizzaOne = new Pizza(inputSize,topOne,topTwo,topThree,topFour);
 
     totalPrice += pizzaOne.returnPrice();
 
-    $("#output").append("<li>" + "You ordered a " + inputSize + " pizza " +  pizzaOne.returnToppings()) + "</li>";
-
-    $("#output").append("<li>" + "The total is now " + totalPrice + " $" + "</li>");
+    $("#output").append("<li>" + "You ordered a " + inputSize + " pizza " +  pizzaOne.returnToppings() + "." + "</li>");
+    $("#output").append("<li>" + "That pizza costs " + pizzaOne.returnPrice() + "$"+"</li>");
+    $("#output").append("<li>" + "The total is now " + totalPrice + "$" + "</li>");
 
     console.log(pizzaOne.returnPrice());
 

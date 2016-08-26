@@ -50,8 +50,8 @@ This software is licensed under a MIT license.
 
 **Example Input:** Pizza Size medium, Pepperoni, Ham
 
-**Example Output:** [You ordered a medium pizza with pepperoni and ham. The total is now 6.]
+**Example Output:** [You ordered a medium pizza with pepperoni and ham. That pizza costs 6. The total is now 6.]
 
 **Example Input:** Pizza Size small, Pepperoni
 
-**Example Output:** [You ordered a small pizza with pepperoni. The total is now 9.5.]
+**Example Output:** [You ordered a small pizza with pepperoni. That pizza costs 3.5. The total is now 9.5.]
