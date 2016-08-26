@@ -1,4 +1,6 @@
 //business logic
+var totalPrice = 0;
+
 function Pizza(size, pepperoni, ham, green) {
   this.pizzaSize = size;
   this.hasPepperoni = pepperoni;
@@ -45,23 +47,31 @@ Pizza.prototype.returnToppings = function()
 
   if(this.hasPepperoni)
   {
-    totalToppings.push("pepperoni")
+    totalToppings.push("pepperoni");
   }
   if(this.hasHam)
   {
-    totalToppings.push("ham")
+    totalToppings.push("ham");
   }
   if(this.hasGreen)
   {
-    totalToppings.push("green peppers")
+    totalToppings.push("green peppers");
   }
 
-  if(totalToppings.length > 1)
+  if(totalToppings.length > 2)
   {
-    totalToppings.splice(totalToppings.length -1,0," and ")
+    var answer = totalToppings.slice(0,totalToppings.length-1) + ", and " + totalToppings[totalToppings.length - 1];
+  }
+  else if(totalToppings.length == 2)
+  {
+    var answer = totalToppings.slice(0,totalToppings.length-1) + " and " + totalToppings[totalToppings.length - 1];
+  }
+  else
+  {
+    var answer = totalToppings;
   }
 
-  return totalToppings;
+  return answer;
 }
 
 //user interface logic
@@ -73,12 +83,12 @@ $(document).ready(function() {
     var topTwo = $("input:checkbox[name=top2]:checked").val();
     var topThree = $("input:checkbox[name=top3]:checked").val();
 
-    console.log(topOne);
-
     var pizzaOne = new Pizza(inputSize,topOne,topTwo,topThree);
 
+    totalPrice += pizzaOne.returnPrice();
+
     $("#output").append("<li>" + "You ordered a " + inputSize + " pizza with " + pizzaOne.returnToppings());
-    $("#output").append("<li>" + "The price is " + pizzaOne.returnPrice())
+    $("#output").append("<li>" + "The total is now " + totalPrice)
 
     console.log(pizzaOne.returnPrice());
 
