@@ -1,11 +1,12 @@
 //business logic
 var totalPrice = 0;
 
-function Pizza(size, pepperoni, ham, green) {
+function Pizza(size, pepperoni, ham, green, pineapple) {
   this.pizzaSize = size;
   this.hasPepperoni = pepperoni;
   this.hasHam = ham;
   this.hasGreen = green;
+  this.hasPineapple = pineapple;
 }
 
 Pizza.prototype.returnPrice = function()
@@ -37,6 +38,10 @@ Pizza.prototype.returnPrice = function()
   {
     price += 0.5;
   }
+  if(this.hasPineapple)
+  {
+    price += 0.5;
+  }
 
   return price;
 }
@@ -57,21 +62,29 @@ Pizza.prototype.returnToppings = function()
   {
     totalToppings.push("green peppers");
   }
+  if(this.hasPineapple)
+  {
+    totalToppings.push("pineapple");
+  }
 
   if(totalToppings.length > 2)
   {
-    var answer = totalToppings.slice(0,totalToppings.length-1) + ", and " + totalToppings[totalToppings.length - 1];
+    totalToppings[totalToppings.length - 1 ] = " and " + totalToppings[totalToppings.length - 1 ];
+
+    var output = totalToppings.join(", ");
   }
   else if(totalToppings.length == 2)
   {
-    var answer = totalToppings.slice(0,totalToppings.length-1) + " and " + totalToppings[totalToppings.length - 1];
+    totalToppings[1] = " and " + totalToppings[1];
+
+    var output = totalToppings.join(" ");
   }
   else
   {
-    var answer = totalToppings;
+    var output = totalToppings;
   }
 
-  return answer;
+  return output;
 }
 
 //user interface logic
@@ -82,8 +95,9 @@ $(document).ready(function() {
     var topOne = $("input:checkbox[name=top1]:checked").val();
     var topTwo = $("input:checkbox[name=top2]:checked").val();
     var topThree = $("input:checkbox[name=top3]:checked").val();
+    var topFour = $("input:checkbox[name=top4]:checked").val();
 
-    var pizzaOne = new Pizza(inputSize,topOne,topTwo,topThree);
+    var pizzaOne = new Pizza(inputSize,topOne,topTwo,topThree, topFour);
 
     totalPrice += pizzaOne.returnPrice();
 
