@@ -1,9 +1,7 @@
-function Pizza(size, pepperoni, onions, ham, peppers) {
+//business logic
+function Pizza(size, toppings) {
   this.pizzaSize = size;
-  this.hasPepperoni = pepperoni;
-  this.hasOnions = onions;
-  this.hasHam = ham;
-  this.hasPeppers = peppers;
+  this.toppings = toppings;
 }
 
 Pizza.prototype.returnPrice = function()
@@ -23,35 +21,22 @@ Pizza.prototype.returnPrice = function()
     price += 7;
   }
 
-  if(this.hasPepperoni)
-  {
-    price += 0.5;
-  }
-
-  if(this.hasOnions)
-  {
-    price += 0.5;
-  }
-
-  if(this.hasHam)
-  {
-    price += 0.5;
-  }
-
-  if(this.hasPeppers)
-  {
-    price += 0.5;
-  }
+  price += (0.5 * this.toppings);
 
   return price;
 }
 
-var pizzaOne = new Pizza("small", false, false, false, false);
+var pizzaOne = new Pizza("small", 2);
 
 console.log(pizzaOne.returnPrice());
 
+//user interface logic
 $(document).ready(function() {
   $("form").submit(function(event) {
+    var inputSize = $("#size").val();
+    var topOne = $("input:checkbox[value=pep]:checked").val();
+
+    console.log(topOne);
 
     event.preventDefault();
   });
