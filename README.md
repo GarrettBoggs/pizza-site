@@ -22,7 +22,7 @@ This software is licensed under a MIT license.
 
 **Example Output:** [5]
 
-* It will return price based off toppings
+* It will return price based off toppings and size
 
 **Example Input:** Pizza size medium, Pepperoni, Ham
 
