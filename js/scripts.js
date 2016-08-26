@@ -1,12 +1,8 @@
 //business logic
-function Pizza(size, pepperoni, ham, green, pineapple, anchovies)
+function Pizza(size, toppings)
 {
   this.pizzaSize = size;
-  this.hasPepperoni = pepperoni;
-  this.hasHam = ham;
-  this.hasGreen = green;
-  this.hasPineapple = pineapple;
-  this.hasAnchovies = anchovies;
+  this.totalToppings = toppings;
 }
 
 Pizza.prototype.returnPrice = function()
@@ -26,70 +22,29 @@ Pizza.prototype.returnPrice = function()
     price += 7;
   }
 
-  if(this.hasPepperoni)
-  {
-    price += 0.5;
-  }
-  if(this.hasHam)
-  {
-    price += 0.5;
-  }
-  if(this.hasGreen)
-  {
-    price += 0.5;
-  }
-  if(this.hasPineapple)
-  {
-    price += 0.5;
-  }
-  if(this.hasAnchovies)
-  {
-    price += 1;
-  }
+  price += this.totalToppings.length * 0.5;
 
   return price;
 }
 
 Pizza.prototype.returnToppings = function()
 {
-  var totalToppings = [];
 
-  if(this.hasPepperoni)
+  if(this.totalToppings.length > 2)
   {
-    totalToppings.push("pepperoni");
-  }
-  if(this.hasHam)
-  {
-    totalToppings.push("ham");
-  }
-  if(this.hasGreen)
-  {
-    totalToppings.push("green peppers");
-  }
-  if(this.hasPineapple)
-  {
-    totalToppings.push("pineapple");
-  }
-  if(this.hasAnchovies)
-  {
-    totalToppings.push("anchovies");
-  }
+    this.totalToppings[this.totalToppings.length - 1 ] = " and " + this.totalToppings[this.totalToppings.length - 1 ];
 
-  if(totalToppings.length > 2)
-  {
-    totalToppings[totalToppings.length - 1 ] = " and " + totalToppings[totalToppings.length - 1 ];
-
-    return " with " + totalToppings.join(", ");
+    return " with " + this.totalToppings.join(", ");
   }
-  else if(totalToppings.length == 2)
+  else if(this.totalToppings.length == 2)
   {
-    totalToppings[1] = " and " + totalToppings[1];
+    this.totalToppings[1] = " and " + this.totalToppings[1];
 
-    return " with " + totalToppings.join(" ");
+    return " with " + this.totalToppings.join(" ");
   }
-  else if(totalToppings.length == 1)
+  else if(this.totalToppings.length == 1)
   {
-    return " with " + totalToppings;
+    return " with " + this.totalToppings;
   }
   else
   {
@@ -114,7 +69,18 @@ $(document).ready(function()
     var topFour = $("input:checkbox[name=top4]:checked").val();
     var topFive = $("input:checkbox[name=top5]:checked").val();
 
-    var pizzaOne = new Pizza(inputSize,topOne,topTwo,topThree,topFour,topFive);
+    var allToppings = [topOne,topTwo,topThree,topFour,topFive];
+    var realToppings = [];
+
+    for(var i = 0; i < allToppings.length; i ++)
+    {
+      if(allToppings[i] != undefined)
+      {
+        realToppings.push(allToppings[i]);
+      }
+    }
+
+    var pizzaOne = new Pizza(inputSize, realToppings);
 
     totalPrice += pizzaOne.returnPrice();
 
@@ -134,30 +100,31 @@ $(document).ready(function()
       width = 500;
     }
 
-    $("#space").append("<li><img class='pizzaImage' src='./img/pizza.png'> </li>");
+    $("#createspace").append("<li><img class='pizzaImage' src='./img/pizza.png'> </li>");
 
-    if(pizzaOne.hasPepperoni)
+    for(var i = 0; i < pizzaOne.totalToppings.length; i++)
     {
-      $("#space").append("<p><img class='pizzaImage' id='layer2' src='./img/pepperoni.png'> </p>");
+      if(pizzaOne.totalToppings[i] === "pepperoni")
+      {
+        $("#createspace").append("<p><img class='pizzaImage' id='layer2' src='./img/pepperoni.png'> </p>");
+      }
+      if(pizzaOne.totalToppings[i] === "ham")
+      {
+        $("#createspace").append("<p><img class='pizzaImage' id='layer3' src='./img/ham.png'> </p>");
+      }
+      if(pizzaOne.totalToppings[i] === "peppers")
+      {
+        $("#createspace").append("<p><img class='pizzaImage' id='layer4' src='./img/greenpepper.png'> </p>");
+      }
+      if(pizzaOne.totalToppings[i] === "pineapple")
+      {
+        $("#createspace").append("<p><img class='pizzaImage' id='layer5' src='./img/pineapple.png'> </p>");
+      }
+      if(pizzaOne.totalToppings[i] === "anchovies")
+      {
+        $("#createspace").append("<p><img class='pizzaImage' id='layer5' src='./img/anchovy.png'> </p>");
+      }
     }
-    if(pizzaOne.hasHam)
-    {
-      $("#space").append("<p><img class='pizzaImage' id='layer3' src='./img/ham.png'> </p>");
-    }
-    if(pizzaOne.hasGreen)
-    {
-      $("#space").append("<p><img class='pizzaImage' id='layer4' src='./img/greenpepper.png'> </p>");
-    }
-    if(pizzaOne.hasPineapple)
-    {
-      $("#space").append("<p><img class='pizzaImage' id='layer5' src='./img/pineapple.png'> </p>");
-    }
-    if(pizzaOne.hasAnchovies)
-    {
-      $("#space").append("<p><img class='pizzaImage' id='layer5' src='./img/anchovy.png'> </p>");
-    }
-
-    $("#space").append("<li><img class='pizzaImage' src='./img/pizza.png'> </li>");
 
     $(".pizzaImage").attr("height", height);
     $(".pizzaImage").attr("width", width);
@@ -170,6 +137,7 @@ $(document).ready(function()
   $("#reset").click(function(event)
   {
     $("#output").empty();
+    $("#createspace").empty();
     totalPrice = 0;
   });
 });
