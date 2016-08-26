@@ -1,7 +1,9 @@
 //business logic
-function Pizza(size, toppings) {
+function Pizza(size, pepperoni, ham, green) {
   this.pizzaSize = size;
-  this.toppings = toppings;
+  this.hasPepperoni = pepperoni;
+  this.hasHam = ham;
+  this.hasGreen = green;
 }
 
 Pizza.prototype.returnPrice = function()
@@ -21,23 +23,64 @@ Pizza.prototype.returnPrice = function()
     price += 7;
   }
 
-  price += (0.5 * this.toppings);
+  if(this.hasPepperoni)
+  {
+    price += 0.5;
+  }
+  if(this.hasHam)
+  {
+    price += 0.5;
+  }
+  if(this.hasGreen)
+  {
+    price += 0.5;
+  }
 
   return price;
 }
 
-var pizzaOne = new Pizza("small", 2);
+Pizza.prototype.returnToppings = function()
+{
+  var totalToppings = []
 
-console.log(pizzaOne.returnPrice());
+  if(this.hasPepperoni)
+  {
+    totalToppings.push("pepperoni")
+  }
+  if(this.hasHam)
+  {
+    totalToppings.push("ham")
+  }
+  if(this.hasGreen)
+  {
+    totalToppings.push("green peppers")
+  }
+
+  if(totalToppings.length > 1)
+  {
+    totalToppings.splice(totalToppings.length -1,0," and ")
+  }
+
+  return totalToppings;
+}
 
 //user interface logic
 $(document).ready(function() {
   $("form").submit(function(event) {
+    event.preventDefault();
     var inputSize = $("#size").val();
-    var topOne = $("input:checkbox[value=pep]:checked").val();
+    var topOne = $("input:checkbox[name=top1]:checked").val();
+    var topTwo = $("input:checkbox[name=top2]:checked").val();
+    var topThree = $("input:checkbox[name=top3]:checked").val();
 
     console.log(topOne);
 
-    event.preventDefault();
+    var pizzaOne = new Pizza(inputSize,topOne,topTwo,topThree);
+
+    $("#output").append("<li>" + "You ordered a " + inputSize + " pizza with " + pizzaOne.returnToppings());
+    $("#output").append("<li>" + "The price is " + pizzaOne.returnPrice())
+
+    console.log(pizzaOne.returnPrice());
+
   });
 });
